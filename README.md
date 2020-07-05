@@ -4,7 +4,8 @@
 
 # Backend のDeploy 方法
 
-事前にSAM CLI をインストールしておいてください。
+事前にSAM CLI をインストールしておいてください。  
+
 [Linux への AWS SAM CLI のインストール - AWS サーバーレスアプリケーションモデル](https://docs.aws.amazon.com/ja_jp/serverless-application-model/latest/developerguide/serverless-sam-cli-install-linux.html)
 
 ```
@@ -38,7 +39,7 @@ aws cloudformation describe-stacks --stack-name aws-training-app --query 'Stacks
 
 # データの登録
 
-上記の作成されたバケットにライセンスコードを記述したcsv ファイルをアップロードします。
+上記の作成されたバケットにライセンスコードを記述したcsv ファイルをアップロードします。  
 以下のフォルダにサンプルcsv を用意していますので、参考にしてください。
 
 backend/sampledata/sample.csv
@@ -84,5 +85,5 @@ yarn start
 yarn build
 ```
 
-frontend/build にビルドされたArtifact が出力されるので、S3 などにアップロードして受講者がアクセスできるように公開してください。
-もしくは、AWS Amplify を利用して公開することも可能です。
+frontend/build にビルドされたArtifact が出力されるので、S3 などにアップロードして受講者がアクセスできるように公開してください。  
+もしくは、AWS Amplify Console を利用して公開することも可能です。
