@@ -1,0 +1,16 @@
+{
+    "AttributeDefinitions": [
+        {
+            "AttributeName": "email", 
+            "AttributeType": "S"
+        }
+    ], 
+    "BillingMode": "PAY_PER_REQUEST",
+    "TableName": "LicenseCodesAssignment", 
+    "KeySchema": [
+        {
+            "KeyType": "HASH", 
+            "AttributeName": "email"
+        }
+    ]
+}

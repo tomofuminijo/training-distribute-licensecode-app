@@ -1,0 +1,6 @@
+{
+    "resource": "/license-codes",
+    "path": "/license-codes",
+    "httpMethod": "POST",
+    "body": "{\"email\":\"test01@example.com\"}"
+}

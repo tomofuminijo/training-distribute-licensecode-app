@@ -1,0 +1,82 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: AWS Training Distribute Licensecode Application
+
+Globals:
+  Api:
+    Cors:
+      AllowMethods: "'OPTIONS,POST,GET'"
+      AllowHeaders: "'Content-Type'"
+      AllowOrigin: "'*'"
+    EndpointConfiguration: REGIONAL
+Resources:
+  LicenseCodeApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: 'prod'
+  RegisterLicenseCode:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.8
+      CodeUri: lambda/registercodes
+      Description: Register License Codes to DynamoDB via An Amazon S3 trigger
+      MemorySize: 128
+      Timeout: 3
+      Environment:
+        Variables:
+          DDB_TABLE_NAME: 
+            Ref: LicenseCodesAssignment
+      Policies:
+        - AmazonDynamoDBFullAccess
+        - AmazonS3ReadOnlyAccess
+      Events:
+        BucketEvent1:
+          Type: S3
+          Properties:
+            Bucket:
+              Ref: LicenseCodesCSVBucket
+            Events:
+              - 's3:ObjectCreated:*'
+  DistributeLicenseCode:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.8
+      CodeUri: lambda/distributecodes
+      Description: Distribute License Codes to Students via API Gateway
+      MemorySize: 128
+      Timeout: 3
+      Environment:
+        Variables:
+          DDB_TABLE_NAME: 
+            Ref: LicenseCodesAssignment
+      Policies:
+        - AmazonDynamoDBFullAccess
+      Events:
+        DistributeLicenseCodeAPI:
+          Type: Api
+          Properties:
+            Path: '/license-codes'
+            Method: post
+            RestApiId: !Ref LicenseCodeApi
+  LicenseCodesCSVBucket:
+    Type: 'AWS::S3::Bucket'
+  LicenseCodesAssignment:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: email
+          AttributeType: S
+      KeySchema:
+        - AttributeName: email
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+Outputs:
+  ApiUri:
+    Value: !Sub "https://${LicenseCodeApi}.execute-api.${AWS::Region}.amazonaws.com/prod"
+  BucketName:
+    Value: !Ref LicenseCodesCSVBucket
+  DynamoDBTable:
+    Value: !Ref LicenseCodesAssignment
+    
