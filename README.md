@@ -2,6 +2,11 @@
 
 トレーニング実施中のライセンスコード配布用のアプリケーションです。
 
+# 簡単デプロイ
+
+[![One-click deployment](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/tomofuminijo/training-distribute-licensecode-app)
+
+
 # Backend のDeploy 方法
 
 事前にSAM CLI をインストールしておいてください。  
