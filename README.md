@@ -9,9 +9,13 @@ AWS Amplify Console を利用してFrontend/Backend を同時にデプロイ可�
 [![One-click deployment](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/tomofuminijo/training-distribute-licensecode-app)
 
 
+上記を実行すると、Backend はCloudFormation にて "training-distribute-code-app" というスタック名で作成されます。  
+Frontend はAmplify Console のドメインからアクセス可能です。
+
+
 # テスト
 
-デプロイが正常に終わったら、Amplify Console のFrontend ドメインにアクセスして、画面が正常に表示されるか確認してください。  
+デプロイが正常に終わったら、Amplify Console のドメインにアクセスして、画面が正常に表示されるか確認してください。  
 テストデータが既に格納されていますので、メールアドレスに `test01@example.com` と入力して「取得」ボタンをクリックしてください。  
 「ライセンスコードは、ABCDEFGHGJK12345678901 です。」 と表示されれば正常に動作しています。
 
@@ -42,6 +46,11 @@ LICENSE_CODE_BACKET=$(aws cloudformation describe-stacks --stack-name $STACK_NAM
 aws s3 cp your_data.csv s3://$LICENSE_CODE_BACKET
 ```
 
+# カスタマイズ方法
+
+Backend 用のStack 名は、Amplify Console の環境変数にて `DEPLOYMENT_BUCKET_NAME` という変数名でデフォルトの名称から変更することが可能です。  
+Stack 内のリソース名は、backend/template.yaml ファイルがSAM テンプレートになりますので、こちらを適宜変更できます。
+
 # リソースの削除方法
 
 ## Backend の削除
@@ -64,7 +73,7 @@ AWS Amplify コンソールから"training-distribute-licensecode-app" を削除
 
 
 
-# AWS Amplify を利用せずに個別にデプロイする場合
+# AWS Amplify Console を利用せずに個別にデプロイする場合
 
 ## Backend のDeploy 方法 (SAM によるデプロイ)
 
