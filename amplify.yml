@@ -1,7 +1,4 @@
 version: 1.0
-env:
-  variables:
-      BACKEND_STACKNAME: training-distribute-code-app
 backend:
   phases:
     preBuild:
@@ -11,6 +8,8 @@ backend:
     build:
       commands:
         - amplifyPush --simple
+        # Set Environment
+        - export BACKEND_STACKNAME=${BACKEND_STACKNAME:-training-distribute-code-app}
         - export DEPLOYMENT_BUCKET_NAME=$(jq -r '.providers.awscloudformation.DeploymentBucketName' ./amplify/#current-cloud-backend/amplify-meta.json)
         - cd backend
         # Deploy SAM Backend Resources
