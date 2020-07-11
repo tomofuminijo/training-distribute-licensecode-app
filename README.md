@@ -4,7 +4,7 @@
 
 # 簡単デプロイ
 
-AWS Amplify を利用してFrontend/Backend を同時にデプロイ可能です。
+AWS Amplify Console を利用してFrontend/Backend を同時にデプロイ可能です。
 
 [![One-click deployment](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/tomofuminijo/training-distribute-licensecode-app)
 
@@ -13,10 +13,9 @@ AWS Amplify を利用してFrontend/Backend を同時にデプロイ可能です
 
 デプロイが正常に終わったら、Amplify Console のFrontend ドメインにアクセスして、画面が正常に表示されるか確認してください。  
 テストデータが既に格納されていますので、メールアドレスに `test01@example.com` と入力して「取得」ボタンをクリックしてください。  
-"ライセンスコードは、ABCDEFGHGJK12345678901 です。" と表示されれば正常に動作しています。
+「ライセンスコードは、ABCDEFGHGJK12345678901 です。」 と表示されれば正常に動作しています。
 
 # 配布するライセンスコードの登録
-
 
 作成されたバケットにライセンスコードを記述したcsv ファイルをアップロードします。  
 以下のフォルダにサンプルcsv を用意していますので、参考にしてください。
@@ -45,7 +44,7 @@ aws s3 cp your_data.csv s3://$LICENSE_CODE_BACKET
 
 # リソースの削除方法
 
-## Backend リソースの削除
+## Backend の削除
 以下のコマンドを実行することでリソースを削除可能です。
 
 ```
@@ -60,7 +59,7 @@ aws cloudformation delete-stack --stack-name=$STACK_NAME
 aws cloudformation wait stack-delete-complete --stack-name=$STACK_NAME
 ```
 
-## Frontend ノアs駆除
+## Frontend の削除
 AWS Amplify コンソールから"training-distribute-licensecode-app" を削除してください。
 
 
@@ -161,5 +160,4 @@ npm run build
 ```
 
 frontend/build にビルドされたArtifact が出力されるので、S3 などにアップロードして受講者がアクセスできるように公開してください。  
-もしくは、AWS Amplify Console を利用して公開することも可能です。
 
