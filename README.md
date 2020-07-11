@@ -7,6 +7,8 @@
 [![One-click deployment](https://oneclick.amplifyapp.com/button.svg)](https://console.aws.amazon.com/amplify/home#/deploy?repo=https://github.com/tomofuminijo/training-distribute-licensecode-app)
 
 
+個別にデプロイする場合は、以下の手順に従ってください。
+
 # Backend のDeploy 方法
 
 事前にSAM CLI をインストールしておいてください。  
