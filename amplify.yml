@@ -15,7 +15,8 @@ frontend:
   phases:
     preBuild:
       commands:
-        - cd frontend
+        - pwd
+        - cd ../frontend
         - ApiUri=$(aws cloudformation describe-stacks --stack-name training-distribute-code-app --query 'Stacks[*].Outputs[?OutputKey==`ApiUri`].OutputValue' --output text)
         - sed -e "s|replace_your_api_url|$ApiUri|" src/config.js.org > src/config.js
         - npm install
