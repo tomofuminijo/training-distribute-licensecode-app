@@ -48,7 +48,7 @@ aws s3 cp your_data.csv s3://$LICENSE_CODE_BACKET
 
 # カスタマイズ方法
 
-Backend 用のStack 名は、Amplify Console の環境変数にて `DEPLOYMENT_BUCKET_NAME` という変数名でデフォルトの名称から変更することが可能です。  
+Backend 用のStack 名は、Amplify Console の環境変数にて `BACKEND_STACKNAME` という変数名でデフォルトの名称から変更することが可能です。  
 Stack 内のリソース名は、backend/template.yaml ファイルがSAM テンプレートになりますので、こちらを適宜変更できます。
 
 # リソースの削除方法
