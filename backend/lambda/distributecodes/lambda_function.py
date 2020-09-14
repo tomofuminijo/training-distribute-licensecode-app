@@ -17,7 +17,7 @@ def lambda_handler(event, context):
     body = json.loads(event['body']);
     print("Received Original event.body: %s" % body)
     
-    email = body['email'].strip()
+    email = body['email'].strip().lower()
     
     licenseCode = ''
     course = ''
