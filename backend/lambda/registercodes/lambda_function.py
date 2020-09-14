@@ -31,7 +31,7 @@ def lambda_handler(event, context):
         for row in reader:
             course = row[0]
             licenseCode = row[1]
-            email = row[2]
+            email = row[2].strip().lower()
             putLicenseCodesToDynamoDB(email, licenseCode, course)
             
 
