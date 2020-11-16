@@ -13,7 +13,7 @@ backend:
         - export DEPLOYMENT_BUCKET_NAME=$(jq -r '.providers.awscloudformation.DeploymentBucketName' ./amplify/#current-cloud-backend/amplify-meta.json)
         - cd backend
         # Deploy SAM Backend Resources
-        - sam deploy --stack-name $BACKEND_STACKNAME --s3-bucket $DEPLOYMENT_BUCKET_NAME
+        - sam deploy --stack-name $BACKEND_STACKNAME --s3-bucket $DEPLOYMENT_BUCKET_NAME --no-fail-on-empty-changeset
         # Put Sample data to S3 bucket
         - LICENSE_CODE_BACKET=$(aws cloudformation describe-stacks --stack-name $BACKEND_STACKNAME --query 'Stacks[*].Outputs[?OutputKey==`BucketName`].OutputValue' --output text)
         - aws s3 cp sampledata/sample.csv s3://$LICENSE_CODE_BACKET/sample.csv
